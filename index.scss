@@ -1,0 +1,75 @@
+@use "sass:math";
+@use "sass:color";
+
+// Powercurve exponents
+$Strc: 2.4;
+$Ntx: 0.57;
+$Nbg: 0.56;
+$Rtx: 0.62;
+$Rbg: 0.65;
+
+// Clamps and scalers
+$Bclip: 1.414;
+$Bthrsh: 0.022;
+$Wscale: 1.14;
+$Woffset: 0.027;
+$Wclamp: 0.1;
+
+// Multipliers
+$redMultiplier: 0.2126729;
+$greenMultiplier: 0.7151522;
+$blueMultiplier: 0.072175;
+
+@function luminance($color) {
+  /* The floating point precision is poor so white would return 1.000001 */
+  @if ($color == white) {
+    @return 1;
+  }
+
+  @if ($color == black) {
+    @return 0;
+  }
+
+  $red: color.red($color);
+  $green: color.green($color);
+  $blue: color.blue($color);
+
+  $redLuminance: math.pow($red / 255, $Strc) * $redMultiplier;
+  $greenLuminance: math.pow($green / 255, $Strc) * $greenMultiplier;
+  $blueLuminance: math.pow($blue / 255, $Strc) * $blueMultiplier;
+
+  @return $redLuminance + $greenLuminance + $blueLuminance;
+}
+
+@function softClip($luminance) {
+  @if ($luminance < 0) {
+    @return 0;
+  } @else if ($luminance < $Bthrsh) {
+    @return $luminance + math.pow(($Bthrsh - $luminance), $Bclip);
+  } @else {
+    @return $luminance;
+  }
+}
+
+@function polarity($textColor, $backgroundColor) {
+  $Ytxt: softClip(luminance($textColor));
+  $Ybg: softClip(luminance($backgroundColor));
+
+  @if ($Ybg > $Ytxt) {
+    @return (math.pow($Ybg, $Nbg) - math.pow($Ytxt, $Ntx)) * $Wscale;
+  } @else {
+    @return (math.pow($Ybg, $Rbg) - math.pow($Ytxt, $Rtx)) * $Wscale;
+  }
+}
+
+@function contrast($textColor, $backgroundColor) {
+  $polarity: polarity($textColor, $backgroundColor);
+
+  @if (math.abs($polarity) < $Wclamp) {
+    @return 0;
+  } @else if ($polarity > 0) {
+    @return ($polarity - $Woffset) * 100;
+  } @else {
+    @return ($polarity + $Woffset) * 100;
+  }
+}
