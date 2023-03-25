@@ -1,0 +1,35 @@
+@use './index' as apca;
+
+/* tests */
+luminances {
+  --red-luminance: apca.luminance(red);
+  --green-luminance: apca.luminance(green);
+  --blue-luminance: apca.luminance(blue);
+
+  --yellow-luminance: apca.luminance(yellow);
+  --brown-luminance: apca.luminance(brown);
+  --violet-luminance: apca.luminance(violet);
+
+  --white-luminance: apca.luminance(white);
+  --black-luminance: apca.luminance(black);
+}
+
+softClip {
+  --black: apca.softClip(apca.luminance(black));
+  --white: apca.softClip(apca.luminance(white));
+  --brown: apca.softClip(apca.luminance(brown));
+}
+
+polarity {
+  --black-on-white: apca.polarity(black, white);
+  --white-on-black: apca.polarity(white, black);
+  --red-on-green: apca.polarity(red, green);
+  --green-on-red: apca.polarity(green, red);
+  --yellow-on-white: apca.polarity(#fc0, white);
+  --white-on-yellow: apca.polarity(white, #fc0);
+}
+
+contrast {
+  --black-on-white: apca.contrast(black, white);
+  --white-on-black: apca.contrast(white, black);
+}
