@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/gfellerph/sass-apca/compare/v1.0.4...v1.1.0) (2023-03-26)
+
+
+### Features
+
+* add text color recommendation function ([37c628d](https://github.com/gfellerph/sass-apca/commit/37c628de1eb9e68a9e9721c1fc9bb2c273acae36))
+
 ## [1.0.4](https://github.com/gfellerph/sass-apca/compare/v1.0.3...v1.0.4) (2023-03-26)
 
 
