@@ -1,5 +1,6 @@
 @use "sass:math";
 @use "sass:color";
+@use "sass:meta";
 
 // -------------------
 //
@@ -10,25 +11,25 @@
 // -------------------
 
 // Powercurve exponents
-$Strc: 2.4;
-$Ntx: 0.57;
-$Nbg: 0.56;
-$Rtx: 0.62;
-$Rbg: 0.65;
+$_Strc: 2.4;
+$_Ntx: 0.57;
+$_Nbg: 0.56;
+$_Rtx: 0.62;
+$_Rbg: 0.65;
 
 // Clamps and scalers
-$Bclip: 1.414;
-$Bthrsh: 0.022;
-$Wscale: 1.14;
-$Woffset: 0.027;
-$Wclamp: 0.1;
+$_Bclip: 1.414;
+$_Bthrsh: 0.022;
+$_Wscale: 1.14;
+$_Woffset: 0.027;
+$_Wclamp: 0.1;
 
 // Multipliers
-$redMultiplier: 0.2126729;
-$greenMultiplier: 0.7151522;
-$blueMultiplier: 0.072175;
+$_redMultiplier: 0.2126729;
+$_greenMultiplier: 0.7151522;
+$_blueMultiplier: 0.072175;
 
-@function luminance($color) {
+@function _luminance($color) {
   // The floating point precision is poor so white would return 1.000001
   @if ($color == white) {
     @return 1;
@@ -42,42 +43,50 @@ $blueMultiplier: 0.072175;
   $green: color.green($color);
   $blue: color.blue($color);
 
-  $redLuminance: math.pow($red / 255, $Strc) * $redMultiplier;
-  $greenLuminance: math.pow($green / 255, $Strc) * $greenMultiplier;
-  $blueLuminance: math.pow($blue / 255, $Strc) * $blueMultiplier;
+  $redLuminance: math.pow($red / 255, $_Strc) * $_redMultiplier;
+  $greenLuminance: math.pow($green / 255, $_Strc) * $_greenMultiplier;
+  $blueLuminance: math.pow($blue / 255, $_Strc) * $_blueMultiplier;
 
   @return $redLuminance + $greenLuminance + $blueLuminance;
 }
 
-@function softClip($luminance) {
+@function _softClip($luminance) {
   @if ($luminance < 0) {
     @return 0;
-  } @else if ($luminance < $Bthrsh) {
-    @return $luminance + math.pow(($Bthrsh - $luminance), $Bclip);
+  } @else if ($luminance < $_Bthrsh) {
+    @return $luminance + math.pow(($_Bthrsh - $luminance), $_Bclip);
   } @else {
     @return $luminance;
   }
 }
 
-@function polarity($textColor, $backgroundColor) {
-  $Ytxt: softClip(luminance($textColor));
-  $Ybg: softClip(luminance($backgroundColor));
+@function _polarity($textColor, $backgroundColor) {
+  $Ytxt: _softClip(_luminance($textColor));
+  $Ybg: _softClip(_luminance($backgroundColor));
 
   @if ($Ybg > $Ytxt) {
-    @return (math.pow($Ybg, $Nbg) - math.pow($Ytxt, $Ntx)) * $Wscale;
+    @return (math.pow($Ybg, $_Nbg) - math.pow($Ytxt, $_Ntx)) * $_Wscale;
   } @else {
-    @return (math.pow($Ybg, $Rbg) - math.pow($Ytxt, $Rtx)) * $Wscale;
+    @return (math.pow($Ybg, $_Rbg) - math.pow($Ytxt, $_Rtx)) * $_Wscale;
   }
 }
 
 @function contrast($textColor, $backgroundColor) {
-  $polarity: polarity($textColor, $backgroundColor);
+  @if (meta.type-of($textColor) != 'color') {
+    @error "Type Error: apca.contrast expects a color as first argument but received #{meta.type-of($textColor)}. Please provide a valid color.";
+  }
 
-  @if (math.abs($polarity) < $Wclamp) {
+  @if (meta.type-of($backgroundColor) != 'color') {
+    @error "Type Error: apca.contrast expects a color as second argument but received #{meta.type-of($backgroundColor)}. Please provide a valid color.";
+  }
+
+  $polarity: _polarity($textColor, $backgroundColor);
+
+  @if (math.abs($polarity) < $_Wclamp) {
     @return 0;
   } @else if ($polarity > 0) {
-    @return ($polarity - $Woffset) * 100;
+    @return ($polarity - $_Woffset) * 100;
   } @else {
-    @return ($polarity + $Woffset) * 100;
+    @return ($polarity + $_Woffset) * 100;
   }
 }
