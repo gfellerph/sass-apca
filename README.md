@@ -27,7 +27,30 @@ $contrast-black-on-white: apca.contrast(black, white); // 106.0406668287
 $contrast-white-on-black: apca.contrast(white, black); // -107.8847261151
 ```
 
-## About
+### Text color recommendation
+Checks a light and a dark text color against a given background and returns the text color with the best contrast.
+
+| Parameter | Type | Default | Description |
+|:--- |:--- |:--- |:--- |
+| $backgroundColor | [Sass color]() | | The background color to check against |
+| $lightColor | [Sass color]() | white | [optional] A light text color |
+| $darkColor | [Sass color]() | black | [optional] A dark text color |
+
+```scss
+@use 'sass-apca/apca';
+
+body {
+  background-color: #ccc;
+
+  // either white or black text color
+  color: apca.recommend-text-color(#ccc); // white
+
+  // with custom light and dark text colors
+  color: apca.recommend-text-color(#ccc, #eee, #111); // #111
+}
+```
+
+## About contrast levels
 These general levels are appropriate for use by themselves, without the need to reference a lookup table. APCA reports contrast as an L<sup>c</sup> value (lightness contrast) from L<sup>c</sup> 0 to L<sup>c</sup> 105+. For accessibility, consider L<sup>c</sup> 15 the point of invisibility for many users, and L<sup>c</sup> 90 is preferred for body text. [^2]
 
 - **L<sup>c</sup> 90** • Preferred level for fluent text and columns of body text with a font no smaller than 14px/weight 400 (normal).

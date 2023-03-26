@@ -25,7 +25,7 @@
 //     #123 vs #234  •   1.7512243099356113
 //     #234 vs #123  •  -1.6349191031377903
 
-$tests: (
+$contrast-tests: (
   (#888, #fff, 63.056469930209424),
   (#fff, #888, -68.54146436644962),
   (#000, #aaa, 58.146262578561334),
@@ -38,9 +38,23 @@ $tests: (
   (#234, #123, 0)
 );
 
-@each $txt, $bg, $contrast in $tests {
+@each $txt, $bg, $contrast in $contrast-tests {
   $res: apca.contrast($txt, $bg);
   @if ($res != $contrast) {
     @error "apca.contrast(#{$txt}, #{$bg}) should be #{$contrast} but received #{$res}";
+  }
+}
+
+$recommendation-tests: (
+  (#fff, black),
+  (#000, white),
+  (#fc0, black),
+  (#2c911c, white)
+);
+
+@each $bg, $txt in $recommendation-tests {
+  $c: apca.recommend-text-color($bg);
+  @if ($c != $txt) {
+    @error "apca.recommend-text-color(#{$bg}) should be #{$txt} but received #{$c}";
   }
 }
