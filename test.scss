@@ -1,35 +1,46 @@
 @use './apca';
+@use 'sass:list';
 
-/* tests */
-luminances {
-  --red-luminance: apca.luminance(red);
-  --green-luminance: apca.luminance(green);
-  --blue-luminance: apca.luminance(blue);
+// https://github.com/Myndex/SAPC-APCA/tree/master/documentation
+// 
+// Test Values for APCA W3 using the G series constants, normal and reverse float values for each color pair.
+// First number is TEXT second number is BACKGROUND.
+// 
+//     TEXT vs BKGND •  EXPECTED RESULT for APCA W3 to 0.1.9 (G-constants)
+// 
+//     #888 vs #fff  •  63.056469930209424
+//     #fff vs #888  • -68.54146436644962  
+// 
+//     #000 vs #aaa  •  58.146262578561334
+//     #aaa vs #000  • -56.24113336839742
+//     
+//     #123 vs #def  •  91.66830811481631
+//     #def vs #123  • -93.06770049484275
+// 
+//     #123 vs #444  •   8.32326136957393
+//     #444 vs #123  •  -7.526878460278154
+// 
+// The below are only for certain experimental low-scale versions, these tests do *not* acpa-w3:
+// 
+//     #123 vs #234  •   1.7512243099356113
+//     #234 vs #123  •  -1.6349191031377903
 
-  --yellow-luminance: apca.luminance(yellow);
-  --brown-luminance: apca.luminance(brown);
-  --violet-luminance: apca.luminance(violet);
+$tests: (
+  (#888, #fff, 63.056469930209424),
+  (#fff, #888, -68.54146436644962),
+  (#000, #aaa, 58.146262578561334),
+  (#aaa, #000, -56.24113336839742),
+  (#123, #def, 91.66830811481631),
+  (#def, #123, -93.06770049484275),
+  (#123, #444, 8.32326136957393),
+  (#444, #123, -7.526878460278154),
+  (#123, #234, 0),
+  (#234, #123, 0)
+);
 
-  --white-luminance: apca.luminance(white);
-  --black-luminance: apca.luminance(black);
-}
-
-softClip {
-  --black: apca.softClip(apca.luminance(black));
-  --white: apca.softClip(apca.luminance(white));
-  --brown: apca.softClip(apca.luminance(brown));
-}
-
-polarity {
-  --black-on-white: apca.polarity(black, white);
-  --white-on-black: apca.polarity(white, black);
-  --red-on-green: apca.polarity(red, green);
-  --green-on-red: apca.polarity(green, red);
-  --yellow-on-white: apca.polarity(#fc0, white);
-  --white-on-yellow: apca.polarity(white, #fc0);
-}
-
-contrast {
-  --black-on-white: apca.contrast(black, white);
-  --white-on-black: apca.contrast(white, black);
+@each $txt, $bg, $contrast in $tests {
+  $res: apca.contrast($txt, $bg);
+  @if ($res != $contrast) {
+    @error "apca.contrast(#{$txt}, #{$bg}) should be #{$contrast} but received #{$res}";
+  }
 }

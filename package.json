@@ -1,6 +1,6 @@
 {
   "name": "sass-apca",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Sass implementation of the [Accessible Perceptual Contrast Algorithm (APCA)](https://git.apcacontrast.com/) for the WCAG 3.0 specification.",
   "keywords": [
     "sass",
@@ -19,10 +19,17 @@
   },
   "bugs": "https://github.com/gfellerph/sass-apca/issues",
   "sass": "./apca.scss",
-  "devDependencies": {
-    "sass": "1.60.0"
+  "files": [
+    "./apca.scss"
+  ],
+  "scripts": {
+    "test": "sass test.scss",
+    "semantic-release": "semantic-release"
   },
-  "peerDependencies": {
-    "sass": ">=1.33.0"
+  "devDependencies": {
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/git": "10.0.1",
+    "sass": "1.60.0",
+    "semantic-release": "21.0.0"
   }
 }
