@@ -1,6 +1,14 @@
 @use "sass:math";
 @use "sass:color";
 
+// -------------------
+//
+// Sass APCA
+//
+// Implementation of the [Accessible Perceptual Contrast Algorithm (APCA)](https://git.apcacontrast.com/) for the WCAG 3.0 specification.
+//
+// -------------------
+
 // Powercurve exponents
 $Strc: 2.4;
 $Ntx: 0.57;
@@ -21,7 +29,7 @@ $greenMultiplier: 0.7151522;
 $blueMultiplier: 0.072175;
 
 @function luminance($color) {
-  /* The floating point precision is poor so white would return 1.000001 */
+  // The floating point precision is poor so white would return 1.000001
   @if ($color == white) {
     @return 1;
   }

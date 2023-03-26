@@ -1,0 +1,28 @@
+{
+  "name": "sass-apca",
+  "version": "0.0.1",
+  "description": "Sass implementation of the [Accessible Perceptual Contrast Algorithm (APCA)](https://git.apcacontrast.com/) for the WCAG 3.0 specification.",
+  "keywords": [
+    "sass",
+    "wcag3",
+    "apca",
+    "wcag-contrast"
+  ],
+  "author": {
+    "name": "Philipp Gfeller",
+    "email": "1659006+gfellerph@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gfellerph/sass-apca.git"
+  },
+  "bugs": "https://github.com/gfellerph/sass-apca/issues",
+  "sass": "./apca.scss",
+  "devDependencies": {
+    "sass": "1.60.0"
+  },
+  "peerDependencies": {
+    "sass": ">=1.33.0"
+  }
+}
