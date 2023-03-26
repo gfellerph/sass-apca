@@ -13,7 +13,7 @@ npm install sass-apca
 
 ### Contrast
 
-APCA reports lightness contrast as an L<sup>c</sup> value from L<sup>c</sup> 0 to L<sup>c</sup> 106 for dark text on a light background, and L<sup>c</sup> 0 to L<sup>c</sup> -108 for light text on a dark background (dark mode). The minus sign merely indicates negative contrast, which means light text on a dark background[^1].
+APCA reports lightness contrast as an L<sup>c</sup> value from L<sup>c</sup> 0 to L<sup>c</sup> 106 for dark text on a light background, and L<sup>c</sup> 0 to L<sup>c</sup> -108 for light text on a dark background (dark mode). The minus sign merely indicates negative contrast, which means light text on a dark background. [^1]
 
 | Parameter | Type | Description |
 |:--- |:--- |:--- |
@@ -28,7 +28,7 @@ $contrast-white-on-black: apca.contrast(white, black); // -107.8847261151
 ```
 
 ## About
-These general levels are appropriate for use by themselves, without the need to reference a lookup table. APCA reports contrast as an L<sup>c</sup> value (lightness contrast) from L<sup>c</sup> 0 to L<sup>c</sup> 105+. For accessibility, consider L<sup>c</sup> 15 the point of invisibility for many users, and L<sup>c</sup> 90 is preferred for body text[^2].
+These general levels are appropriate for use by themselves, without the need to reference a lookup table. APCA reports contrast as an L<sup>c</sup> value (lightness contrast) from L<sup>c</sup> 0 to L<sup>c</sup> 105+. For accessibility, consider L<sup>c</sup> 15 the point of invisibility for many users, and L<sup>c</sup> 90 is preferred for body text. [^2]
 
 - **L<sup>c</sup> 90** • Preferred level for fluent text and columns of body text with a font no smaller than 14px/weight 400 (normal).
 - **L<sup>c</sup> 75** • The minimum level for columns of body text with a font no smaller than 18px/400. L<sup>c</sup> 75 should be considered a minimum for text where readability is important.
