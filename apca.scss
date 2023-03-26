@@ -62,6 +62,15 @@ $_blueMultiplier: 0.072175;
   }
 }
 
+/**
+ * Determine the lightness contrast of a given text and background color using the
+ * APC algorithm
+ *
+ * @param   {color}  $textColor        Text color
+ * @param   {color}  $backgroundColor  Background color
+ *
+ * @return  {number}                    A number between -108 and 107 representing the lightness contrast 
+ */
 @function contrast($textColor, $backgroundColor) {
   @if (meta.type-of($textColor) != 'color') {
     @error "Type Error: apca.contrast expects a color as first argument but received #{meta.type-of($textColor)}. Please provide a valid color.";

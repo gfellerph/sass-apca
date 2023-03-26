@@ -24,6 +24,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GIT_AUTHOR_NAME: "Philipp Gfeller"
-          GIT_AUTHOR_EMAIL: "1659006+gfellerph@users.noreply.github.com"
         run: npm run semantic-release
