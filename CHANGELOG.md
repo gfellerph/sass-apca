@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/gfellerph/sass-apca/compare/v1.0.3...v1.0.4) (2023-03-26)
+
+
+### Bug Fixes
+
+* add semantic-release/github ([e6779fb](https://github.com/gfellerph/sass-apca/commit/e6779fb9d6d1f1e3b7089832a239755fc6d4e878))
+
 ## [1.0.3](https://github.com/gfellerph/sass-apca/compare/v1.0.2...v1.0.3) (2023-03-26)
 
 
