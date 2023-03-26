@@ -30,22 +30,13 @@ $_greenMultiplier: 0.7151522;
 $_blueMultiplier: 0.072175;
 
 @function _luminance($color) {
-  // The floating point precision is poor so white would return 1.000001
-  @if ($color == white) {
-    @return 1;
-  }
-
-  @if ($color == black) {
-    @return 0;
-  }
-
   $red: color.red($color);
   $green: color.green($color);
   $blue: color.blue($color);
 
-  $redLuminance: math.pow($red / 255, $_Strc) * $_redMultiplier;
-  $greenLuminance: math.pow($green / 255, $_Strc) * $_greenMultiplier;
-  $blueLuminance: math.pow($blue / 255, $_Strc) * $_blueMultiplier;
+  $redLuminance: math.pow(math.div($red, 255), $_Strc) * $_redMultiplier;
+  $greenLuminance: math.pow(math.div($green, 255), $_Strc) * $_greenMultiplier;
+  $blueLuminance: math.pow(math.div($blue, 255), $_Strc) * $_blueMultiplier;
 
   @return $redLuminance + $greenLuminance + $blueLuminance;
 }
