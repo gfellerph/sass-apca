@@ -61,7 +61,6 @@ These general levels are appropriate for use by themselves, without the need to 
 - **L<sup>c</sup> 15** • The absolute minimum for any non-text that needs to be discernible and differentiable, and is no less than 6px in its smallest dimension. This may include disabled large buttons. Designers should treat anything below this level as invisible, as it will not be visible for many users. This minimum level should be avoided for any items important to the use, understanding, or interaction of the site.
 
 ## Roadmap
-- Polarity function for figuring out if light or dark text has a higher contrast on any given background
 - Compliance check for getting the current level of compliance of a given contrast ratio
 
 
