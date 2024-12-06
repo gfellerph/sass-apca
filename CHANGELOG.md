@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/gfellerph/sass-apca/compare/v1.1.0...v1.1.1) (2024-12-06)
+
+
+### Bug Fixes
+
+* Replace deprecated sass color functions for new channel function. ([#62](https://github.com/gfellerph/sass-apca/issues/62)) ([10455c9](https://github.com/gfellerph/sass-apca/commit/10455c96e2f4675dc15166b2b605e5a2644b764b))
+
 # [1.1.0](https://github.com/gfellerph/sass-apca/compare/v1.0.4...v1.1.0) (2023-03-26)
 
 
