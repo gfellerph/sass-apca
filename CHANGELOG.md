@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/gfellerph/sass-apca/compare/v1.1.1...v1.2.0) (2026-07-03)
+
+
+### Features
+
+* **warnings:** Add warning levels configuration ([1ebcec7](https://github.com/gfellerph/sass-apca/commit/1ebcec7bc920a6e0c20bc66efdd1100ec564961c))
+
 ## [1.1.1](https://github.com/gfellerph/sass-apca/compare/v1.1.0...v1.1.1) (2024-12-06)
 
 
