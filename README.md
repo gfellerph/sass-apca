@@ -50,6 +50,24 @@ body {
 }
 ```
 
+### Warning levels configuration
+
+Control the verbosity of the warnings when loading the module, default is `90`.
+
+To *only warn for critical issues* (e.g., lower than 45):
+```scss
+@use "sass-apca/apca" with (
+  $warning-threshold: 45
+);
+```
+
+To *disable all warnings*:
+```scss
+@use "sass-apca/apca" with (
+  $warning-threshold: 0
+);
+```
+
 ## About contrast levels
 These general levels are appropriate for use by themselves, without the need to reference a lookup table. APCA reports contrast as an L<sup>c</sup> value (lightness contrast) from L<sup>c</sup> 0 to L<sup>c</sup> 105+. For accessibility, consider L<sup>c</sup> 15 the point of invisibility for many users, and L<sup>c</sup> 90 is preferred for body text. [^2]
 
